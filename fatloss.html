@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>40天减脂打卡仪表盘</title>
+    <!-- 引入图表库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        /* 背景：健康食材插画 + 半透明遮罩，不遮挡内容 */
+        body {
+            background-image: url('https://img.freepik.com/free-vector/hand-drawn-healthy-food-background_23-2148169733.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #fdf6f0;
+            color: #333;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: -1;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+            margin-bottom: 28px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #2d3436;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 15px;
+            color: #636e72;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.05);
+        }
+
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            color: #2d3436;
+            margin-bottom: 16px;
+            border-left: 5px solid #fd79a8;
+            padding-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        th {
+            background-color: #fafafa;
+            color: #444;
+        }
+
+        .today {
+            background-color: #fff5f7 !important;
+        }
+
+        .done { color: #00b894; font-weight: 600; }
+        .doing { color: #fd79a8; font-weight: 600; }
+
+        .chart-box {
+            width: 100%;
+            height: 270px;
+            margin-top: 10px;
+        }
+
+        .tip {
+            background: #fef3f8;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            color: #c44569;
+            margin-top: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>40天减脂打卡 · 可视化仪表盘</h1>
+        <p>初始体重：52.0kg｜目标体重：50.0kg｜每日热量预算：1500kcal</p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h2>📉 体重趋势 + 周度预测</h2>
+            <div class="chart-box"><canvas id="weightChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h2>🔥 热量摄入 + 计划预测</h2>
+            <div class="chart-box"><canvas id="kcalChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h2>🎯 减重完成度</h2>
+            <div class="chart-box"><canvas id="goalChart"></canvas></div>
+        </div>
+
+        <div class="card">
+            <h2>📅 每日体重 & 热量记录</h2>
+            <table>
+                <tr><th>日期</th><th>天数</th><th>体重</th><th>热量</th></tr>
+                <tr><td>05-13</td><td>Day1</td><td>52.0kg</td><td>695</td></tr>
+                <tr><td>05-14</td><td>Day2</td><td>51.5kg</td><td>1138</td></tr>
+                <tr><td>05-15</td><td>Day3</td><td>51.4kg</td><td>1073</td></tr>
+                <tr><td>05-24</td><td>Day12</td><td>51.4kg</td><td>—</td></tr>
+                <tr><td>05-25</td><td>Day13</td><td>51.5kg</td><td>1124</td></tr>
+                <tr class="today"><td>05-26</td><td>Day14</td><td>51.1kg</td><td>835</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="card card-full">
+        <h2>✅ 周目标进度</h2>
+        <table>
+            <tr><th>周次</th><th>目标区间</th><th>减重</th><th>状态</th></tr>
+            <tr><td>第1周</td><td>52.0 → 51.4</td><td>0.6kg</td><td class="done">✅ 已完成</td></tr>
+            <tr><td>第2周</td><td>51.4 → 51.0</td><td>0.4kg</td><td class="done">✅ 已完成</td></tr>
+            <tr><td>第3周</td><td>51.0 → 50.6</td><td>0.4kg</td><td class="doing">🔄 进行中</td></tr>
+            <tr><td>第4周</td><td>50.6 → 50.25</td><td>0.35kg</td><td>待开始</td></tr>
+            <tr><td>第5周</td><td>50.25 → 49.9</td><td>0.35kg</td><td>待开始</td></tr>
+        </table>
+
+        <div class="tip">
+            ✨ 今日总结：已减重 0.9kg｜总目标 2.0kg｜整体完成度 45%<br>
+            💧 每日饮水：1.8~2.2L<br>
+            🍤 优选食材：虾仁、鸡胸肉、鸡腿肉、瘦牛肉｜☕ 美式咖啡促肠道蠕动｜🍎 晚餐推荐：芭乐+小番茄
+        </div>
+    </div>
+
+    <div class="footer">减脂打卡仪表盘 · 持续更新 ✨</div>
+
+    <script>
+        // 1. 体重折线图 + 周度预测虚线
+        const weightCtx = document.getElementById('weightChart').getContext('2d');
+        new Chart(weightCtx, {
+            type: 'line',
+            data: {
+                labels: ['Day1','Day2','Day3','Day12','Day13','Day14','第3周目标','第4周目标','第5周目标'],
+                datasets: [
+                    {
+                        label: '实际体重(kg)',
+                        data: [52.0,51.5,51.4,51.4,51.5,51.1,null,null,null],
+                        borderColor: '#fd79a8',
+                        backgroundColor: 'rgba(253,121,168,0.15)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5
+                    },
+                    {
+                        label: '周计划预测体重(kg)',
+                        data: [null,null,null,null,null,51.1,50.6,50.25,49.9],
+                        borderColor: '#2d3436',
+                        borderDash: [6,6],
+                        fill: false,
+                        tension: 0.4,
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: { min: 49.5, max: 52.5 }
+                }
+            }
+        });
+
+        // 2. 热量柱状图 + 每日计划虚线
+        const kcalCtx = document.getElementById('kcalChart').getContext('2d');
+        new Chart(kcalCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Day1','Day2','Day3','Day13','Day14','后续每日计划'],
+                datasets: [
+                    {
+                        label: '实际摄入(kcal)',
+                        data: [695,1138,1073,1124,835,null],
+                        backgroundColor: '#00cec9',
+                        barPercentage: 0.6
+                    },
+                    {
+                        label: '计划摄入(kcal)',
+                        type: 'line',
+                        data: [null,null,null,null,null,1000],
+                        borderColor: '#fd79a8',
+                        borderDash: [5,5],
+                        fill: false,
+                        pointRadius: 4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // 3. 环形饼图 + 放大百分比标注
+        const goalCtx = document.getElementById('goalChart').getContext('2d');
+        new Chart(goalCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['已减重 0.9kg', '待减重 1.1kg'],
+                datasets: [{
+                    data: [0.9, 1.1],
+                    backgroundColor: ['#00b894', '#e0e0e0'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { fontSize: 15, padding: 15 }
+                    },
+                    tooltip: {
+                        bodyFont: { size: 16 },
+                        titleFont: { size: 18 },
+                        callbacks: {
+                            label: function(context) {
+                                const total = 2.0;
+                                const percent = ((context.raw / total) * 100).toFixed(0);
+                                return `${context.label} ｜ 占比 ${percent}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
