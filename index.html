@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>40天减脂打卡 · 精致仪表盘</title>
-    <!-- 换成国内稳定CDN + 固定兼容版本 -->
     <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -143,7 +142,7 @@
         .data-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .data-table th {
@@ -157,6 +156,7 @@
         .data-table td {
             padding: 12px 10px;
             border-bottom: 1px solid #f1f1f1;
+            word-break: break-all;
         }
 
         .data-table tr.today-row {
@@ -238,283 +238,356 @@
 </head>
 
 <body>
-    <header class="page-header">
-        <h1><i class="fa-solid fa-fire-flame-curved"></i> 40天减脂打卡计划</h1>
-        <p>初始体重：52.0kg &nbsp;|&nbsp; 目标体重：50.0kg &nbsp;|&nbsp; 每日热量预算：1500kcal</p>
-    </header>
 
-    <div class="overview-grid">
-        <div class="stat-card">
-            <i class="fa-solid fa-scale-balanced"></i>
-            <div class="num">51.1kg</div>
-            <div class="text">当前体重</div>
+<header class="page-header">
+    <h1><i class="fa-solid fa-fire-flame-curved"></i> 40天减脂打卡计划</h1>
+    <p>初始体重：52.0kg | 目标体重：50.0kg | 每日热量预算：1500kcal</p>
+</header>
+
+<div class="overview-grid">
+    <div class="stat-card">
+        <i class="fa-solid fa-scale-balanced"></i>
+        <div class="num">50.6kg</div>
+        <div class="text">当前体重（未排便）</div>
+    </div>
+    <div class="stat-card">
+        <i class="fa-solid fa-arrow-down-long"></i>
+        <div class="num">1.4kg</div>
+        <div class="text">累计减重</div>
+    </div>
+    <div class="stat-card">
+        <i class="fa-solid fa-percent"></i>
+        <div class="num">70%</div>
+        <div class="text">计划完成度</div>
+    </div>
+    <div class="stat-card">
+        <i class="fa-solid fa-calendar-check"></i>
+        <div class="num">Day 15</div>
+        <div class="text">已打卡天数</div>
+    </div>
+</div>
+
+<!-- 每日热量摄入 & 缺口对比 -->
+<div class="main-grid">
+    <div class="content-card card-full">
+        <h2 class="card-title"><i class="fa-solid fa-fire"></i> 每日热量摄入 & 缺口对比</h2>
+        <div class="chart-wrap" style="height:320px;">
+            <canvas id="calorieGapChart"></canvas>
         </div>
-        <div class="stat-card">
-            <i class="fa-solid fa-arrow-down-long"></i>
-            <div class="num">0.9kg</div>
-            <div class="text">累计减重</div>
-        </div>
-        <div class="stat-card">
-            <i class="fa-solid fa-percent"></i>
-            <div class="num">45%</div>
-            <div class="text">计划完成度</div>
-        </div>
-        <div class="stat-card">
-            <i class="fa-solid fa-calendar-check"></i>
-            <div class="num">Day 14</div>
-            <div class="text">已打卡天数</div>
+    </div>
+</div>
+
+<!-- 每日饮食明细完整表格 -->
+<div class="main-grid">
+    <div class="content-card card-full">
+        <h2 class="card-title"><i class="fa-solid fa-utensils"></i> 每日饮食明细（餐食+单品热量）</h2>
+        <table class="data-table">
+            <tr>
+                <th>天数</th>
+                <th>日期</th>
+                <th>体重</th>
+                <th>饮食明细</th>
+                <th>总摄入</th>
+                <th>热量缺口</th>
+            </tr>
+            <tr>
+                <td>Day1</td>
+                <td>05-13</td>
+                <td>52.0kg</td>
+                <td>早餐：蛋炒饭+肉+青菜｜午餐：烤鸡腿肉Taco｜晚餐：饺子馅5个</td>
+                <td>695 kcal</td>
+                <td>805 kcal</td>
+            </tr>
+            <tr>
+                <td>Day2</td>
+                <td>05-14</td>
+                <td>51.5kg</td>
+                <td>早餐：肉包+小米粥+鸡块+黑巧派｜午餐：银鲷鱼轻食｜饮品：橙C美式｜下午茶：水果+甜品</td>
+                <td>1138 kcal</td>
+                <td>362 kcal</td>
+            </tr>
+            <tr>
+                <td>Day3</td>
+                <td>05-15</td>
+                <td>51.4kg</td>
+                <td>早餐：手工粉+煎蛋｜加餐：果干糕｜饮品：豆奶+苹果C美式｜午餐：烤鸡牛轻食｜晚餐：水牛乳蛋糕</td>
+                <td>1073 kcal</td>
+                <td>427 kcal</td>
+            </tr>
+            <tr>
+                <td>Day12</td>
+                <td>05-24</td>
+                <td>51.4kg</td>
+                <td>重启打卡，无饮食记录</td>
+                <td>—</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>Day13</td>
+                <td>05-25</td>
+                <td>51.5kg</td>
+                <td>早餐：牛油果+面包丁｜午餐：赛百味牛肉三明治｜加餐：曲奇+薯条+橘子｜饮品：泡腾片｜晚餐：香蕉+荔枝</td>
+                <td>1124 kcal</td>
+                <td>376 kcal</td>
+            </tr>
+            <tr>
+                <td>Day14</td>
+                <td>05-26</td>
+                <td>51.1kg</td>
+                <td>早餐：Tim’s可颂｜加餐：茯苓夹饼｜午餐：烤大青虾轻食｜饮品：橙C美式｜晚餐：芭乐果 + 6个小番茄</td>
+                <td>750 kcal</td>
+                <td>750 kcal</td>
+            </tr>
+            <tr class="today-row">
+                <td>Day15</td>
+                <td>05-27</td>
+                <td>50.6kg（未排便）</td>
+                <td>早餐：直径10cm红豆包 1个</td>
+                <td>234 kcal</td>
+                <td>1266 kcal</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="main-grid">
+    <div class="content-card">
+        <h2 class="card-title"><i class="fa-solid fa-chart-line"></i> 体重趋势 & 周度预测</h2>
+        <div class="chart-wrap">
+            <canvas id="weightChart"></canvas>
         </div>
     </div>
 
-    <div class="main-grid">
-        <div class="content-card">
-            <h2 class="card-title"><i class="fa-solid fa-chart-line"></i> 体重趋势 & 周度预测</h2>
-            <div class="chart-wrap">
-                <canvas id="weightChart" width="400" height="280"></canvas>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h2 class="card-title"><i class="fa-solid fa-chart-bar"></i> 热量摄入 & 计划参考</h2>
-            <div class="chart-wrap">
-                <canvas id="kcalChart" width="400" height="280"></canvas>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h2 class="card-title"><i class="fa-solid fa-circle-dot"></i> 减重目标完成度</h2>
-            <div class="chart-wrap">
-                <canvas id="goalChart" width="400" height="280"></canvas>
-            </div>
-        </div>
-
-        <div class="content-card">
-            <h2 class="card-title"><i class="fa-solid fa-book"></i> 每日打卡台账</h2>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>日期</th>
-                        <th>打卡天数</th>
-                        <th>体重</th>
-                        <th>当日热量</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>05-13</td>
-                        <td>Day1</td>
-                        <td>52.0kg</td>
-                        <td>695 kcal</td>
-                    </tr>
-                    <tr>
-                        <td>05-14</td>
-                        <td>Day2</td>
-                        <td>51.5kg</td>
-                        <td>1138 kcal</td>
-                    </tr>
-                    <tr>
-                        <td>05-15</td>
-                        <td>Day3</td>
-                        <td>51.4kg</td>
-                        <td>1073 kcal</td>
-                    </tr>
-                    <tr>
-                        <td>05-24</td>
-                        <td>Day12</td>
-                        <td>51.4kg</td>
-                        <td>—</td>
-                    </tr>
-                    <tr>
-                        <td>05-25</td>
-                        <td>Day13</td>
-                        <td>51.5kg</td>
-                        <td>1124 kcal</td>
-                    </tr>
-                    <tr class="today-row">
-                        <td>05-26</td>
-                        <td>Day14</td>
-                        <td>51.1kg</td>
-                        <td>835 kcal</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="content-card">
+        <h2 class="card-title"><i class="fa-solid fa-chart-bar"></i> 热量摄入 & 计划参考</h2>
+        <div class="chart-wrap">
+            <canvas id="kcalChart"></canvas>
         </div>
     </div>
 
-    <div class="main-grid">
-        <div class="content-card card-full">
-            <h2 class="card-title"><i class="fa-solid fa-list-check"></i> 周目标进度 & 生活指南</h2>
-            <table class="data-table" style="margin-bottom: 20px;">
-                <thead>
-                    <tr>
-                        <th>周次</th>
-                        <th>目标体重区间</th>
-                        <th>计划减重</th>
-                        <th>当前状态</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>第1周</td>
-                        <td>52.0kg → 51.4kg</td>
-                        <td>0.6kg</td>
-                        <td class="tag-done">✅ 已完成</td>
-                    </tr>
-                    <tr>
-                        <td>第2周</td>
-                        <td>51.4kg → 51.0kg</td>
-                        <td>0.4kg</td>
-                        <td class="tag-done">✅ 已完成</td>
-                    </tr>
-                    <tr>
-                        <td>第3周</td>
-                        <td>51.0kg → 50.6kg</td>
-                        <td>0.4kg</td>
-                        <td class="tag-doing">🔄 进行中</td>
-                    </tr>
-                    <tr>
-                        <td>第4周</td>
-                        <td>50.6kg → 50.25kg</td>
-                        <td>0.35kg</td>
-                        <td>⏳ 待开始</td>
-                    </tr>
-                    <tr>
-                        <td>第5周</td>
-                        <td>50.25kg → 49.9kg</td>
-                        <td>0.35kg</td>
-                        <td>⏳ 待开始</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="progress-box">
-                <div class="progress-label">
-                    <span><i class="fa-solid fa-glass-water"></i> 每日饮水进度</span>
-                    <span>1.4L / 2.0L</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-inner"></div>
-                </div>
-            </div>
-
-            <div style="margin-top: 16px;">
-                <p style="margin-bottom: 8px; font-weight: 500;"><i class="fa-solid fa-utensils"></i> 推荐优质食材：</p>
-                <div class="food-list">
-                    <span class="food-tag">虾仁</span>
-                    <span class="food-tag">鸡胸肉</span>
-                    <span class="food-tag">鸡腿肉</span>
-                    <span class="food-tag">瘦牛肉</span>
-                    <span class="food-tag">芭乐</span>
-                    <span class="food-tag">小番茄</span>
-                    <span class="food-tag">美式咖啡</span>
-                </div>
-            </div>
-            <p style="margin-top: 14px; color: #636e72; font-size: 14px;">
-                💡 小贴士：香蕉建议放在早餐/上午加餐食用；每日坚持饮水1.8~2.2L，配合轻度运动效果更佳。
-            </p>
+    <div class="content-card">
+        <h2 class="card-title"><i class="fa-solid fa-circle-dot"></i> 减重目标完成度</h2>
+        <div class="chart-wrap">
+            <canvas id="goalChart"></canvas>
         </div>
     </div>
 
-    <footer class="page-footer">
-        <i class="fa-solid fa-star"></i> 自律打卡 · 遇见更好的自己 &nbsp;|&nbsp; 持续更新中
-    </footer>
+    <div class="content-card">
+        <h2 class="card-title"><i class="fa-solid fa-book"></i> 每日打卡台账</h2>
+        <table class="data-table">
+            <tr>
+                <th>日期</th>
+                <th>打卡天数</th>
+                <th>体重</th>
+                <th>当日热量</th>
+            </tr>
+            <tr>
+                <td>05-13</td>
+                <td>Day1</td>
+                <td>52.0kg</td>
+                <td>695 kcal</td>
+            </tr>
+            <tr>
+                <td>05-14</td>
+                <td>Day2</td>
+                <td>51.5kg</td>
+                <td>1138 kcal</td>
+            </tr>
+            <tr>
+                <td>05-15</td>
+                <td>Day3</td>
+                <td>51.4kg</td>
+                <td>1073 kcal</td>
+            </tr>
+            <tr>
+                <td>05-24</td>
+                <td>Day12</td>
+                <td>51.4kg</td>
+                <td>—</td>
+            </tr>
+            <tr>
+                <td>05-25</td>
+                <td>Day13</td>
+                <td>51.5kg</td>
+                <td>1124 kcal</td>
+            </tr>
+            <tr>
+                <td>05-26</td>
+                <td>Day14</td>
+                <td>51.1kg</td>
+                <td>750 kcal</td>
+            </tr>
+            <tr class="today-row">
+                <td>05-27</td>
+                <td>Day15</td>
+                <td>50.6kg（未排便）</td>
+                <td>234 kcal</td>
+            </tr>
+        </table>
+    </div>
+</div>
 
-    <!-- 所有图表代码放在body最后，确保DOM已加载 -->
-    <script>
-        // 等页面DOM全部加载完再画图
-        window.onload = function() {
-            // 1. 体重折线图
-            const weightCtx = document.getElementById('weightChart').getContext('2d');
-            new Chart(weightCtx, {
+<div class="main-grid">
+    <div class="content-card card-full">
+        <h2 class="card-title"><i class="fa-solid fa-list-check"></i> 周目标进度 & 生活指南</h2>
+        <table class="data-table" style="margin-bottom: 20px;">
+            <tr>
+                <th>周次</th>
+                <th>目标体重区间</th>
+                <th>计划减重</th>
+                <th>当前状态</th>
+            </tr>
+            <tr>
+                <td>第1周</td>
+                <td>52.0kg → 51.4kg</td>
+                <td>0.6kg</td>
+                <td class="tag-done">✅ 已完成</td>
+            </tr>
+            <tr>
+                <td>第2周</td>
+                <td>51.4kg → 51.0kg</td>
+                <td>0.4kg</td>
+                <td class="tag-done">✅ 已完成</td>
+            </tr>
+            <tr>
+                <td>第3周</td>
+                <td>51.0kg → 50.6kg</td>
+                <td>0.4kg</td>
+                <td class="tag-done">✅ 暂时达成，持续观察体重保持情况</td>
+            </tr>
+            <tr>
+                <td>第4周</td>
+                <td>50.6kg → 50.25kg</td>
+                <td>0.35kg</td>
+                <td>⏳ 待开始</td>
+            </tr>
+            <tr>
+                <td>第5周</td>
+                <td>50.25kg → 49.9kg</td>
+                <td>0.35kg</td>
+                <td>⏳ 待开始</td>
+            </tr>
+        </table>
+
+        <div class="progress-box">
+            <div class="progress-label">
+                <span><i class="fa-solid fa-glass-water"></i> 每日饮水进度</span>
+                <span>1.4L / 2.0L</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-inner"></div>
+            </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+            <p style="margin-bottom: 8px; font-weight: 500;"><i class="fa-solid fa-utensils"></i> 推荐优质食材：</p>
+            <div class="food-list">
+                <span class="food-tag">虾仁</span>
+                <span class="food-tag">鸡胸肉</span>
+                <span class="food-tag">鸡腿肉</span>
+                <span class="food-tag">瘦牛肉</span>
+                <span class="food-tag">芭乐</span>
+                <span class="food-tag">小番茄</span>
+                <span class="food-tag">美式咖啡</span>
+            </div>
+        </div>
+        <p style="margin-top: 14px; color: #636e72; font-size: 14px; line-height: 1.6;">
+            💡 减脂小贴士：① 香蕉、红豆包这类碳水尽量放在早餐/上午食用，晚餐优先选择蔬菜、优质蛋白；② 每日饮水保持1.8~2.2L，分多次小口饮用，提升代谢；③ 固定晨起空腹称重，统一测量标准，数据更具参考性；④ 饮食少油少糖，加餐优先选低GI果蔬，避免零食加餐；⑤ 保证规律作息，尽量不熬夜，睡眠不足易造成水肿与体重反弹；⑥ 日常搭配轻度活动，散步、拉伸均可，帮助稳定体重。
+        </p>
+    </div>
+</div>
+
+<footer class="page-footer">
+    <i class="fa-solid fa-star"></i> 自律打卡 · 遇见更好的自己 | 持续更新中
+</footer>
+
+<script>
+window.addEventListener('load', function(){
+
+// 热量摄入 + 缺口 图表
+new Chart(document.getElementById('calorieGapChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+        labels: ['Day1','Day2','Day3','Day12','Day13','Day14','Day15'],
+        datasets: [
+            {
+                label: '实际摄入(kcal)',
+                data: [695,1138,1073,0,1124,750,234],
+                backgroundColor: '#74b9ff',
+                borderRadius: 6
+            },
+            {
+                label: '热量缺口(kcal)',
+                data: [805,362,427,0,376,750,1266],
+                borderColor: '#ff7979',
+                borderDash: [5,5],
+                borderWidth: 2,
+                pointRadius: 4,
                 type: 'line',
-                data: {
-                    labels: ['Day1','Day2','Day3','Day12','Day13','Day14','第3周目标','第4周目标','第5周目标'],
-                    datasets: [
-                        {
-                            label: '实际体重(kg)',
-                            data: [52.0,51.5,51.4,51.4,51.5,51.1,null,null,null],
-                            borderColor: '#ff7979',
-                            backgroundColor: 'rgba(255, 121, 121, 0.12)',
-                            tension: 0.4,
-                            fill: true,
-                            pointRadius: 6,
-                            pointHoverRadius: 8
-                        },
-                        {
-                            label: '周计划预测体重(kg)',
-                            data: [null,null,null,null,null,51.1,50.6,50.25,49.9],
-                            borderColor: '#636e72',
-                            borderDash: [6,6],
-                            fill: false,
-                            tension: 0.4,
-                            pointRadius: 5
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { min: 49.5, max: 52.5, grid: { color: 'rgba(0,0,0,0.05)' } },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
+                fill: false
+            },
+            {
+                label: '预算1500kcal',
+                data: [1500,1500,1500,1500,1500,1500,1500],
+                borderColor: '#999',
+                borderDash: [2,2],
+                type: 'line',
+                pointRadius: 0,
+                fill: false
+            }
+        ]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
 
-            // 2. 热量柱状图
-            const kcalCtx = document.getElementById('kcalChart').getContext('2d');
-            new Chart(kcalCtx, {
-                type: 'bar',
-                data: {
-                    labels: ['Day1','Day2','Day3','Day13','Day14','后续每日计划'],
-                    datasets: [
-                        {
-                            label: '实际摄入(kcal)',
-                            data: [695,1138,1073,1124,835,null],
-                            backgroundColor: '#74b9ff',
-                            borderRadius: 6,
-                            barPercentage: 0.6
-                        },
-                        {
-                            label: '计划摄入(kcal)',
-                            type: 'line',
-                            data: [null,null,null,null,null,1000],
-                            borderColor: '#ff7979',
-                            borderDash: [5,5],
-                            fill: false,
-                            pointRadius: 5
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: { grid: { color: 'rgba(0,0,0,0.05)' } },
-                        x: { grid: { display: false } }
-                    }
-                }
-            });
+// 体重趋势图表
+new Chart(document.getElementById('weightChart').getContext('2d'), {
+    type: 'line',
+    data: {
+        labels: ['Day1','Day2','Day3','Day12','Day13','Day14','Day15'],
+        datasets: [
+            {
+                label: '体重(kg)',
+                data: [52.0,51.5,51.4,51.4,51.5,51.1,50.6],
+                borderColor: '#ff7979',
+                tension: 0.4,
+                fill: true
+            }
+        ]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
 
-            // 3. 环形图（v2 用 doughnut）
-            const goalCtx = document.getElementById('goalChart').getContext('2d');
-            new Chart(goalCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['已减重 0.9kg', '待减重 1.1kg'],
-                    datasets: [{
-                        data: [0.9, 1.1],
-                        backgroundColor: ['#00b894', '#e9ecef'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    cutoutPercentage: 70
-                }
-            });
-        };
-    </script>
+// 单项热量柱状图
+new Chart(document.getElementById('kcalChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+        labels: ['Day1','Day2','Day3','Day13','Day14','Day15'],
+        datasets: [
+            {
+                label: '摄入(kcal)',
+                data: [695,1138,1073,1124,750,234],
+                backgroundColor: '#74b9ff'
+            }
+        ]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+});
+
+// 目标完成度环形图
+new Chart(document.getElementById('goalChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+        labels: ['已减重1.4kg','待减重0.6kg'],
+        datasets: [{
+            data: [1.4,0.6],
+            backgroundColor: ['#00b894','#e9ecef']
+        }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, cutoutPercentage:70 }
+});
+
+});
+</script>
 </body>
 </html>
