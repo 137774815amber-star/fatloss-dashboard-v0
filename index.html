@@ -185,7 +185,7 @@
 
         .progress-inner {
             height: 100%;
-            width: 70%;
+            width: 15%;
             background: linear-gradient(90deg, #74b9ff, #0984e3);
             border-radius: 6px;
         }
@@ -248,7 +248,7 @@
     <div class="stat-card">
         <i class="fa-solid fa-scale-balanced"></i>
         <div class="num">50.6kg</div>
-        <div class="text">当前体重（未排便）</div>
+        <div class="text">今日晨起体重（无排便）</div>
     </div>
     <div class="stat-card">
         <i class="fa-solid fa-arrow-down-long"></i>
@@ -262,7 +262,7 @@
     </div>
     <div class="stat-card">
         <i class="fa-solid fa-calendar-check"></i>
-        <div class="num">Day 15</div>
+        <div class="num">Day 17</div>
         <div class="text">已打卡天数</div>
     </div>
 </div>
@@ -338,13 +338,29 @@
                 <td>750 kcal</td>
                 <td>750 kcal</td>
             </tr>
-            <tr class="today-row">
+            <tr>
                 <td>Day15</td>
                 <td>05-27</td>
                 <td>50.6kg（未排便）</td>
-                <td>早餐：直径10cm红豆包1个｜午餐：鲁菜四人餐（葱油海蜇、葱爆肉、土豆炒肉、烧茄子、炸糍粑、葱油饼，剩余2/5，4人平分）｜饮品：500ml冰得宝100%椰子水、无糖瑞幸橙C美式</td>
-                <td>1068 kcal</td>
-                <td>432 kcal</td>
+                <td>早餐：直径10cm红豆包1个｜午餐：鲁菜四人餐（葱油海蜇、葱爆肉、土豆炒肉、烧茄子、炸糍粑、葱油饼，剩余2/5，4人平分）｜饮品：500ml冰得宝100%椰子水、无糖瑞幸橙C美式｜晚餐：脆肉鲩双人火锅套餐（加价换天麻鱼汤底，剔除砂锅鱼粥，4人分食套餐1/4）+单点烤乳鸽（仅食用1/8）+吊龙牛肉（4人平分）</td>
+                <td>1558 kcal</td>
+                <td>-58 kcal</td>
+            </tr>
+            <tr>
+                <td>Day16</td>
+                <td>05-28</td>
+                <td>晨起51.0kg（午饭后排便）；22:30空腹51.0kg</td>
+                <td>早餐：整颗百香果碱水面包｜饮品：250ml苹果汁（每100ml 184千焦）｜午餐：超模厨房虾仁轻食（商家标198kcal，实际预估210kcal）+瑞幸生烘美式（少冰无糖）｜晚餐：无进食</td>
+                <td>569 kcal</td>
+                <td>931 kcal</td>
+            </tr>
+            <tr class="today-row">
+                <td>Day17</td>
+                <td>05-29</td>
+                <td>50.6kg（晨起空腹，无排便）</td>
+                <td>早餐：鳗鱼奥尔良寿司便当，只吃所有馅料topping、仅一口米饭；未吃肉松军舰、中华海草</td>
+                <td>310 kcal</td>
+                <td>1190 kcal</td>
             </tr>
         </table>
     </div>
@@ -417,11 +433,23 @@
                 <td>51.1kg</td>
                 <td>750 kcal</td>
             </tr>
-            <tr class="today-row">
+            <tr>
                 <td>05-27</td>
                 <td>Day15</td>
                 <td>50.6kg（未排便）</td>
-                <td>1068 kcal</td>
+                <td>1558 kcal</td>
+            </tr>
+            <tr>
+                <td>05-28</td>
+                <td>Day16</td>
+                <td>晨起51.0kg，晚间22:30 51.0kg</td>
+                <td>569 kcal</td>
+            </tr>
+            <tr class="today-row">
+                <td>05-29</td>
+                <td>Day17</td>
+                <td>50.6kg（晨起空腹无排便）</td>
+                <td>310 kcal</td>
             </tr>
         </table>
     </div>
@@ -453,7 +481,7 @@
                 <td>第3周</td>
                 <td>51.0kg → 50.6kg</td>
                 <td>0.4kg</td>
-                <td class="tag-done">✅ 暂时达成，持续观察体重保持情况</td>
+                <td class="tag-done">✅ 顺利达成，昨日低卡空腹辅助回落体重</td>
             </tr>
             <tr>
                 <td>第4周</td>
@@ -472,11 +500,9 @@
         <div class="progress-box">
             <div class="progress-label">
                 <span><i class="fa-solid fa-glass-water"></i> 每日饮水进度</span>
-                <span>1.4L / 2.0L</span>
+                <span>0.3L / 2.0L</span>
             </div>
-            <div class="progress-bar">
-                <div class="progress-inner"></div>
-            </div>
+            <div class="progress-inner"></div>
         </div>
 
         <div style="margin-top: 16px;">
@@ -484,15 +510,16 @@
             <div class="food-list">
                 <span class="food-tag">虾仁</span>
                 <span class="food-tag">鸡胸肉</span>
-                <span class="food-tag">鸡腿肉</span>
                 <span class="food-tag">瘦牛肉</span>
                 <span class="food-tag">芭乐</span>
                 <span class="food-tag">小番茄</span>
                 <span class="food-tag">美式咖啡</span>
+                <span class="food-tag">高纤花菜/菠菜</span>
+                <span class="food-tag">深海鱼肉（鳗鱼适量）</span>
             </div>
         </div>
         <p style="margin-top: 14px; color: #636e72; font-size: 14px; line-height: 1.6;">
-            💡 减脂小贴士：① 香蕉、红豆包这类碳水尽量放在早餐/上午食用，晚餐优先选择蔬菜、优质蛋白；② 每日饮水保持1.8~2.2L，分多次小口饮用，提升代谢；③ 固定晨起空腹称重，统一测量标准，数据更具参考性；④ 饮食少油少糖，加餐优先选低GI果蔬，避免零食加餐；⑤ 保证规律作息，尽量不熬夜，睡眠不足易造成水肿与体重反弹；⑥ 日常搭配轻度活动，散步、拉伸均可，帮助稳定体重。
+            💡 减脂小贴士：① 寿司便当可选择性剔除高油高碳水部分，只吃鱼虾馅料，大幅降低总热量；② 单日极低热量摄入后无需连续空腹，午餐可搭配足量蔬菜+优质蛋白，避免代谢下滑；③ 排便后体重数据更具参考性，无排便时体重上浮多为肠道残渣；④ 鳗鱼酱汁含糖油偏高，适量食用即可；⑤ 保持每日1.8L以上饮水，促进肠道蠕动；⑥ 偶尔单日低卡可快速平衡前一日超标热量，但不建议长期断晚餐；⑦ 黑咖啡、高纤蔬菜可辅助消水肿、促排便。
         </p>
     </div>
 </div>
@@ -508,17 +535,17 @@ window.addEventListener('load', function(){
 new Chart(document.getElementById('calorieGapChart').getContext('2d'), {
     type: 'bar',
     data: {
-        labels: ['Day1','Day2','Day3','Day12','Day13','Day14','Day15'],
+        labels: ['Day1','Day2','Day3','Day12','Day13','Day14','Day15','Day16','Day17'],
         datasets: [
             {
                 label: '实际摄入(kcal)',
-                data: [695,1138,1073,0,1124,750,1068],
+                data: [695,1138,1073,0,1124,750,1558,569,310],
                 backgroundColor: '#74b9ff',
                 borderRadius: 6
             },
             {
                 label: '热量缺口(kcal)',
-                data: [805,362,427,0,376,750,432],
+                data: [805,362,427,0,376,750,-58,931,1190],
                 borderColor: '#ff7979',
                 borderDash: [5,5],
                 borderWidth: 2,
@@ -528,7 +555,7 @@ new Chart(document.getElementById('calorieGapChart').getContext('2d'), {
             },
             {
                 label: '预算1500kcal',
-                data: [1500,1500,1500,1500,1500,1500,1500],
+                data: [1500,1500,1500,1500,1500,1500,1500,1500,1500],
                 borderColor: '#999',
                 borderDash: [2,2],
                 type: 'line',
@@ -544,11 +571,11 @@ new Chart(document.getElementById('calorieGapChart').getContext('2d'), {
 new Chart(document.getElementById('weightChart').getContext('2d'), {
     type: 'line',
     data: {
-        labels: ['Day1','Day2','Day3','Day12','Day13','Day14','Day15'],
+        labels: ['Day1','Day2','Day3','Day12','Day13','Day14','Day15','Day16','Day17'],
         datasets: [
             {
                 label: '体重(kg)',
-                data: [52.0,51.5,51.4,51.4,51.5,51.1,50.6],
+                data: [52.0,51.5,51.4,51.4,51.5,51.1,50.6,51.0,50.6],
                 borderColor: '#ff7979',
                 tension: 0.4,
                 fill: true
@@ -562,11 +589,11 @@ new Chart(document.getElementById('weightChart').getContext('2d'), {
 new Chart(document.getElementById('kcalChart').getContext('2d'), {
     type: 'bar',
     data: {
-        labels: ['Day1','Day2','Day3','Day13','Day14','Day15'],
+        labels: ['Day1','Day2','Day3','Day13','Day14','Day15','Day16','Day17'],
         datasets: [
             {
                 label: '摄入(kcal)',
-                data: [695,1138,1073,1124,750,1068],
+                data: [695,1138,1073,1124,750,1558,569,310],
                 backgroundColor: '#74b9ff'
             }
         ]
