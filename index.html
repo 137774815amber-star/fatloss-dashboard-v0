@@ -1,3 +1,6 @@
+可以。下面是你当前最新版 `index.html` 的完整代码，可以直接替换 GitHub 仓库里的 `index.html`。
+
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -21,12 +24,7 @@
             --line: #f3dfe5;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; }
 
         body {
             background-image: url("https://img.freepik.com/free-vector/hand-drawn-healthy-food-background_23-2148169733.jpg");
@@ -60,17 +58,8 @@
             color: #fff;
         }
 
-        .page-header h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            line-height: 1.25;
-        }
-
-        .page-header p {
-            font-size: 15px;
-            opacity: 0.96;
-            line-height: 1.7;
-        }
+        .page-header h1 { font-size: 32px; margin-bottom: 10px; line-height: 1.25; }
+        .page-header p { font-size: 15px; opacity: 0.96; line-height: 1.7; }
 
         .overview-grid {
             display: grid;
@@ -79,8 +68,7 @@
             margin-bottom: 20px;
         }
 
-        .stat-card,
-        .content-card {
+        .stat-card, .content-card {
             background: var(--card);
             border-radius: 8px;
             box-shadow: 0 8px 24px rgba(216, 163, 177, 0.13);
@@ -96,44 +84,14 @@
             text-align: center;
         }
 
-        .stat-card i {
-            font-size: 24px;
-            margin-bottom: 9px;
-            color: var(--rose-deep);
-        }
+        .stat-card i { font-size: 24px; margin-bottom: 9px; color: var(--rose-deep); }
+        .stat-card .num { font-size: 23px; font-weight: 750; color: var(--ink); margin-bottom: 4px; }
+        .stat-card .text { font-size: 13px; color: var(--muted); line-height: 1.45; }
+        .stat-card.warning i, .stat-card.warning .num { color: #c46a4a; }
 
-        .stat-card .num {
-            font-size: 23px;
-            font-weight: 750;
-            color: var(--ink);
-            margin-bottom: 4px;
-        }
-
-        .stat-card .text {
-            font-size: 13px;
-            color: var(--muted);
-            line-height: 1.45;
-        }
-
-        .stat-card.warning i,
-        .stat-card.warning .num {
-            color: #c46a4a;
-        }
-
-        .main-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-bottom: 18px;
-        }
-
-        .content-card {
-            padding: 22px;
-        }
-
-        .card-full {
-            grid-column: 1 / -1;
-        }
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+        .content-card { padding: 22px; }
+        .card-full { grid-column: 1 / -1; }
 
         .card-title {
             font-size: 19px;
@@ -146,129 +104,328 @@
             line-height: 1.35;
         }
 
-        .card-title i {
-            color: var(--rose-deep);
-            font-size: 18px;
+        .card-title i { color: var(--rose-deep); font-size: 18px; }
+        .chart-wrap { width: 100%; height: 288px; position: relative; }
+        .chart-wrap.tall { height: 330px; }
+        .chart-fallback { display: none; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+        .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .data-table th { background: #fff0f4; color: #b64c67; padding: 13px 10px; text-align: left; }
+        .data-table td { padding: 12px 10px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.55; }
+        .data-table tr.today-row { background: #f4f1ff; font-weight: 550; }
+        .data-table tr.low-row { background: #fff7d8; }
+        .data-table tr.over-row { background: #fff0ec; }
+
+        .risk-note { display: inline-block; margin-top: 4px; color: #b46b2d; font-size: 12px; font-weight: 700; }
+        .ok-note { display: inline-block; margin-top: 4px; color: #4f9b7f; font-size: 12px; font-weight: 700; }
+
+        .progress-box { margin: 14px 0; }
+        .progress-label { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--muted); margin-bottom: 6px; }
+        .progress-bar { height: 12px; background: #f6e8ee; border-radius: 6px; overflow: hidden; }
+        .progress-inner { height: 100%; width: 71.5%; background: linear-gradient(90deg, #ffb3c1, #ff8fab); border-radius: 6px; }
+        .progress-inner.weight { width: 70%; background: linear-gradient(90deg, #b5ead7, #7fd5be); }
+        .progress-inner.time { width: 42.5%; background: linear-gradient(90deg, #fff4c7, #ffdac1); }
+
+        .health-note { border-left: 4px solid var(--peach); background: #fff8ed; color: #6c4b3e; line-height: 1.75; }
+        .data-note { border-left: 4px solid var(--sky); background: #f6f7ff; color: #4e5470; line-height: 1.75; }
+        .movement-note { border-left: 4px solid var(--mint); background: #f4fff9; color: #3f6658; line-height: 1.75; }
+
+        .note-list { list-style: none; display: grid; gap: 8px; font-size: 14px; }
+        .page-footer { text-align: center; padding: 24px 0; color: var(--muted); font-size: 14px; margin-top: 10px; }
+
+        @media (max-width: 980px) {
+            .overview-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
-        .chart-wrap {
-            width: 100%;
-            height: 288px;
-            position: relative;
+        @media (max-width: 768px) {
+            body { padding: 18px 12px; }
+            .overview-grid { grid-template-columns: repeat(2, 1fr); }
+            .main-grid { grid-template-columns: 1fr; }
+            .page-header h1 { font-size: 24px; }
+            .content-card { padding: 18px; }
         }
+    </style>
+</head>
 
-        .chart-wrap.tall {
-            height: 330px;
+<body>
+
+<header class="page-header">
+    <h1><i class="fa-solid fa-heart-pulse"></i> 40天健康体态管理</h1>
+    <p>身高：168cm｜初始体重：52.0kg｜当前体重：50.6kg｜原始参考目标：50.0kg｜每日记录预算：1500kcal</p>
+</header>
+
+<section class="overview-grid" aria-label="核心指标">
+    <div class="stat-card"><i class="fa-solid fa-scale-balanced"></i><div class="num">50.6kg</div><div class="text">今日晨起空腹体重<br>无排便记录</div></div>
+    <div class="stat-card warning"><i class="fa-solid fa-triangle-exclamation"></i><div class="num">BMI 17.9</div><div class="text">成人参考口径<br>低于18.5需谨慎</div></div>
+    <div class="stat-card"><i class="fa-solid fa-arrow-trend-down"></i><div class="num">-1.4kg</div><div class="text">相对Day1变化<br>不等同纯脂肪</div></div>
+    <div class="stat-card"><i class="fa-solid fa-bowl-food"></i><div class="num">997kcal</div><div class="text">有效记录日均摄入<br>8天有热量记录</div></div>
+    <div class="stat-card"><i class="fa-solid fa-bullseye"></i><div class="num">70%</div><div class="text">Fatloss参考达成度<br>1.4kg / 2.0kg</div></div>
+    <div class="stat-card"><i class="fa-solid fa-calendar-days"></i><div class="num">42.5%</div><div class="text">40天时间进度<br>Day17 / Day40</div></div>
+</section>
+
+<section class="main-grid">
+    <div class="content-card health-note">
+        <h2 class="card-title"><i class="fa-solid fa-shield-heart"></i> 健康边界提醒</h2>
+        <ul class="note-list">
+            <li>当前身高体重组合已低于成人BMI常规健康下限参考值，后续不建议把“继续掉秤”作为唯一目标。</li>
+            <li>Day1、Day14、Day16 属于低摄入日，不建议连续复制；次日重点应是蛋白质、蔬菜、适量主食和水分。</li>
+            <li>火锅、卤味、重蘸水后的体重波动多与盐分和水分有关，不应被解读为脂肪突然增加。</li>
+            <li>如出现明显乏力、头晕、心慌、月经异常、反复暴食或强烈进食焦虑，应暂停减重导向并咨询专业人士。</li>
+        </ul>
+    </div>
+
+    <div class="content-card data-note">
+        <h2 class="card-title"><i class="fa-solid fa-ruler-combined"></i> 数据口径说明</h2>
+        <ul class="note-list">
+            <li>体重目标完成度按原始参考目标计算：52.0kg 到 50.0kg，当前完成 1.4kg / 2.0kg。</li>
+            <li>时间进度单独计算：Day17 / 40天 = 42.5%，不再与体重进度混用。</li>
+            <li>Day12 是“饮食记录缺失”，图表中按缺失值处理，不计作 0 kcal。</li>
+            <li>苹果黄芪水仅作为低卡饮品记录，不写成确定的医学消水肿结论。</li>
+        </ul>
+    </div>
+
+    <div class="content-card movement-note card-full">
+        <h2 class="card-title"><i class="fa-solid fa-person-walking"></i> 运动习惯提示</h2>
+        <ul class="note-list">
+            <li>周末或短途出游保留 City Walk：10000-12000 步更适合做日常活动量，不需要拿来惩罚某一餐。</li>
+            <li>羽毛球维持每两周 1 小时，时间在 21-23 点时，运动后以补水和拉伸为主，不额外安排宵夜。</li>
+            <li>游泳按每月 1 次作为舒缓型运动保留；如果当天食欲增加，优先补蛋白和少量主食。</li>
+            <li>普通工作日可加 10-15 分钟餐后慢走，用来帮助消化和稳定精神状态，不追求高强度消耗。</li>
+        </ul>
+    </div>
+</section>
+
+<section class="main-grid">
+    <div class="content-card card-full">
+        <h2 class="card-title"><i class="fa-solid fa-fire"></i> 每日热量摄入 &amp; 预算差额</h2>
+        <div class="chart-wrap tall"><canvas id="calorieGapChart"></canvas><p class="chart-fallback">图表依赖未加载，但下方表格数据仍可正常查看。</p></div>
+    </div>
+</section>
+
+<section class="main-grid">
+    <div class="content-card card-full">
+        <h2 class="card-title"><i class="fa-solid fa-utensils"></i> 每日饮食明细</h2>
+        <table class="data-table">
+            <thead><tr><th>天数</th><th>日期</th><th>体重</th><th>饮食明细</th><th>总摄入</th><th>预算差额</th></tr></thead>
+            <tbody id="foodRows"></tbody>
+        </table>
+    </div>
+</section>
+
+<section class="main-grid">
+    <div class="content-card"><h2 class="card-title"><i class="fa-solid fa-chart-line"></i> 体重趋势</h2><div class="chart-wrap"><canvas id="weightChart"></canvas><p class="chart-fallback">图表依赖未加载，但下方台账仍可正常查看。</p></div></div>
+    <div class="content-card"><h2 class="card-title"><i class="fa-solid fa-chart-bar"></i> 摄入分布 &amp; 安全提醒线</h2><div class="chart-wrap"><canvas id="kcalChart"></canvas><p class="chart-fallback">图表依赖未加载，但下方台账仍可正常查看。</p></div></div>
+    <div class="content-card"><h2 class="card-title"><i class="fa-solid fa-circle-dot"></i> Fatloss参考达成度</h2><div class="chart-wrap"><canvas id="goalChart"></canvas><p class="chart-fallback">图表依赖未加载，但进度条仍可正常查看。</p></div></div>
+    <div class="content-card">
+        <h2 class="card-title"><i class="fa-solid fa-book"></i> 每日打卡台账</h2>
+        <table class="data-table"><thead><tr><th>日期</th><th>打卡天数</th><th>体重</th><th>热量</th></tr></thead><tbody id="ledgerRows"></tbody></table>
+    </div>
+</section>
+
+<section class="main-grid">
+    <div class="content-card card-full">
+        <h2 class="card-title"><i class="fa-solid fa-list-check"></i> 阶段进度 &amp; 下一步策略</h2>
+        <table class="data-table" style="margin-bottom: 20px;">
+            <thead><tr><th>阶段</th><th>原参考区间</th><th>当前解释</th><th>建议动作</th></tr></thead>
+            <tbody>
+                <tr><td>第1周</td><td>52.0kg → 51.4kg</td><td><span class="ok-note">已完成</span></td><td>保留记录，不把早期快速下降全部视为脂肪下降。</td></tr>
+                <tr><td>第2周</td><td>51.4kg → 51.0kg</td><td><span class="ok-note">已完成</span></td><td>继续观察睡眠、排便、盐分与体重波动的关系。</td></tr>
+                <tr><td>第3周</td><td>51.0kg → 50.6kg</td><td><span class="ok-note">已达阶段线</span></td><td>从“压低体重”转向“营养完整度和体态稳定”。</td></tr>
+                <tr><td>第4周</td><td>50.6kg附近稳态观察</td><td><span class="risk-note">不建议快速继续下探</span></td><td>优先补足蛋白质、蔬菜、适量主食，减少连续低摄入日。</td></tr>
+                <tr><td>第5-6周</td><td>50.0kg仅作参考点</td><td>待评估</td><td>用围度、精神状态、运动表现和作息稳定度共同判断。</td></tr>
+            </tbody>
+        </table>
+
+        <div class="progress-box"><div class="progress-label"><span><i class="fa-solid fa-bowl-rice"></i> 今日热量进度</span><span>1072kcal / 1500kcal = 71.5%</span></div><div class="progress-bar"><div class="progress-inner"></div></div></div>
+        <div class="progress-box"><div class="progress-label"><span><i class="fa-solid fa-bullseye"></i> Fatloss参考达成度</span><span>1.4kg / 2.0kg = 70%</span></div><div class="progress-bar"><div class="progress-inner weight"></div></div></div>
+        <div class="progress-box"><div class="progress-label"><span><i class="fa-solid fa-calendar-check"></i> 时间进度</span><span>17天 / 40天 = 42.5%</span></div><div class="progress-bar"><div class="progress-inner time"></div></div></div>
+
+        <p style="margin-top: 14px; color: #5f6b6d; font-size: 14px; line-height: 1.7;">
+            今日复盘：总摄入 1072kcal，未超过1500kcal记录预算；午餐火锅可能带来短期盐分储水，明日体重如有波动不等于脂肪反弹。晚餐摄入偏少，不建议连续复制。下一餐优先选择优质蛋白、蔬菜和少量主食，让体态管理更稳。
+        </p>
+    </div>
+</section>
+
+<footer class="page-footer">
+    <i class="fa-solid fa-leaf"></i> 健康记录 · 体态管理 · 数据是线索，不是审判
+</footer>
+
+<script>
+window.addEventListener("load", function() {
+    var budget = 1500;
+    var startWeight = 52.0;
+    var referenceTarget = 50.0;
+
+    var records = [
+        { day: "Day1", date: "05-13", weight: 52.0, weightText: "52.0kg", food: "早餐：蛋炒饭+肉+青菜｜午餐：烤鸡腿肉Taco｜晚餐：饺子馅5个", intake: 695, note: "低摄入日，不建议连续复制", status: "low" },
+        { day: "Day2", date: "05-14", weight: 51.5, weightText: "51.5kg", food: "早餐：肉包+小米粥+鸡块+黑巧派｜午餐：银鲷鱼轻食｜饮品：橙C美式｜下午茶：水果+甜品", intake: 1138, note: "预算内", status: "normal" },
+        { day: "Day3", date: "05-15", weight: 51.4, weightText: "51.4kg", food: "早餐：手工粉+煎蛋｜加餐：果干糕｜饮品：豆奶+苹果C美式｜午餐：烤鸡牛轻食｜晚餐：水牛乳蛋糕", intake: 1073, note: "预算内", status: "normal" },
+        { day: "Day12", date: "05-24", weight: 51.4, weightText: "51.4kg", food: "重启打卡，无饮食记录", intake: null, note: "记录缺失，不计作0kcal", status: "missing" },
+        { day: "Day13", date: "05-25", weight: 51.5, weightText: "51.5kg", food: "早餐：牛油果+面包丁｜午餐：赛百味牛肉三明治｜加餐：曲奇+薯条+橘子｜饮品：泡腾片｜晚餐：香蕉+荔枝", intake: 1124, note: "预算内", status: "normal" },
+        { day: "Day14", date: "05-26", weight: 51.1, weightText: "51.1kg", food: "早餐：Tim's可颂｜加餐：茯苓夹饼｜午餐：烤大青虾轻食｜饮品：橙C美式｜晚餐：芭乐果+6个小番茄", intake: 750, note: "低摄入日，不建议连续复制", status: "low" },
+        { day: "Day15", date: "05-27", weight: 50.6, weightText: "50.6kg（未排便）", food: "早餐：红豆包1个｜午餐：鲁菜四人餐平分｜饮品：椰子水+无糖橙C美式｜晚餐：脆肉鲩火锅套餐1/4+烤乳鸽1/8+吊龙牛肉", intake: 1558, note: "轻微超预算，属于正常浮动", status: "over" },
+        { day: "Day16", date: "05-28", weight: 51.0, weightText: "晨起51.0kg；晚间空腹51.0kg", food: "早餐：百香果碱水面包+苹果汁｜午餐：虾仁轻食+无糖美式｜晚餐：未进食", intake: 569, note: "极低摄入日，不建议复制", status: "low" },
+        { day: "Day17", date: "05-29", weight: 50.6, weightText: "50.6kg（晨起空腹，无排便）", food: "早餐：鳗鱼寿司便当（仅吃topping，一口米饭）｜午餐：贵州豆米双人火锅均分｜晚餐：7颗小番茄｜饮品：400mL苹果黄芪水", intake: 1072, note: "预算内，但晚餐偏少", status: "today" }
+    ];
+
+    function formatKcal(value) { return value === null ? "—" : value + " kcal"; }
+    function formatGap(value) { return value === null ? "—" : value + " kcal"; }
+
+    function rowClass(record) {
+        if (record.status === "today") return "today-row";
+        if (record.status === "low") return "low-row";
+        if (record.status === "over") return "over-row";
+        return "";
+    }
+
+    function noteClass(record) {
+        return record.status === "normal" || record.status === "today" ? "ok-note" : "risk-note";
+    }
+
+    function renderTables() {
+        var foodRows = document.getElementById("foodRows");
+        var ledgerRows = document.getElementById("ledgerRows");
+
+        records.forEach(function(record) {
+            var gap = record.intake === null ? null : budget - record.intake;
+
+            var foodRow = document.createElement("tr");
+            foodRow.className = rowClass(record);
+            foodRow.innerHTML =
+                "<td>" + record.day + "</td>" +
+                "<td>" + record.date + "</td>" +
+                "<td>" + record.weightText + "</td>" +
+                "<td>" + record.food + "</td>" +
+                "<td>" + formatKcal(record.intake) + "<br><span class=\"" + noteClass(record) + "\">" + record.note + "</span></td>" +
+                "<td>" + formatGap(gap) + "</td>";
+            foodRows.appendChild(foodRow);
+
+            var ledgerRow = document.createElement("tr");
+            ledgerRow.className = rowClass(record);
+            ledgerRow.innerHTML =
+                "<td>" + record.date + "</td>" +
+                "<td>" + record.day + "</td>" +
+                "<td>" + record.weightText + "</td>" +
+                "<td>" + formatKcal(record.intake) + "</td>";
+            ledgerRows.appendChild(ledgerRow);
+        });
+    }
+
+    function showChartFallbacks() {
+        document.querySelectorAll(".chart-fallback").forEach(function(el) { el.style.display = "block"; });
+    }
+
+    renderTables();
+
+    if (!window.Chart) {
+        showChartFallbacks();
+        return;
+    }
+
+    var labels = records.map(function(record) { return record.day; });
+    var intakeData = records.map(function(record) { return record.intake; });
+    var gapData = records.map(function(record) { return record.intake === null ? null : budget - record.intake; });
+    var weightData = records.map(function(record) { return record.weight; });
+    var budgetLine = records.map(function(record) { return record.intake === null ? null : budget; });
+    var reminderLine = records.map(function(record) { return record.intake === null ? null : 1200; });
+    var lowerWarningLine = records.map(function(record) { return record.intake === null ? null : 800; });
+    var completedWeight = Number((startWeight - records[records.length - 1].weight).toFixed(1));
+    var remainingReference = Math.max(0, Number((records[records.length - 1].weight - referenceTarget).toFixed(1)));
+    var totalTargetLoss = Number((startWeight - referenceTarget).toFixed(1));
+    var fatLossPercent = Math.min(100, Math.max(0, Math.round((completedWeight / totalTargetLoss) * 100)));
+
+    var commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: { labels: { boxWidth: 14, fontColor: "#7b6f73" } },
+        tooltips: { mode: "index", intersect: false }
+    };
+
+    new Chart(document.getElementById("calorieGapChart").getContext("2d"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [
+                { label: "实际摄入(kcal)", data: intakeData, backgroundColor: "#ffb3c1" },
+                { label: "预算差额(kcal)", data: gapData, borderColor: "#7fd5be", borderDash: [5, 5], borderWidth: 2, pointRadius: 4, type: "line", fill: false },
+                { label: "预算1500kcal", data: budgetLine, borderColor: "#b8a9b0", borderDash: [2, 2], type: "line", pointRadius: 0, fill: false },
+                { label: "1200kcal提醒线", data: reminderLine, borderColor: "#f4b183", borderDash: [4, 4], type: "line", pointRadius: 0, fill: false }
+            ]
+        },
+        options: commonOptions
+    });
+
+    new Chart(document.getElementById("weightChart").getContext("2d"), {
+        type: "line",
+        data: { labels: labels, datasets: [{ label: "体重(kg)", data: weightData, borderColor: "#e56f86", backgroundColor: "rgba(255, 179, 193, 0.22)", lineTension: 0.25, pointRadius: 4, fill: true }] },
+        options: commonOptions
+    });
+
+    new Chart(document.getElementById("kcalChart").getContext("2d"), {
+        type: "bar",
+        data: {
+            labels: labels,
+            datasets: [
+                { label: "摄入(kcal)", data: intakeData, backgroundColor: "#c7ceea" },
+                { label: "1200kcal提醒线", data: reminderLine, borderColor: "#f4b183", borderDash: [4, 4], type: "line", pointRadius: 0, fill: false },
+                { label: "800kcal低摄入线", data: lowerWarningLine, borderColor: "#e56f86", borderDash: [2, 4], type: "line", pointRadius: 0, fill: false }
+            ]
+        },
+        options: commonOptions
+    });
+
+    var doughnutCenterText = {
+        beforeDraw: function(chart) {
+            var center = chart.config.options.elements && chart.config.options.elements.center;
+            if (!center) return;
+
+            var ctx = chart.chart.ctx;
+            var chartArea = chart.chartArea;
+            var centerX = (chartArea.left + chartArea.right) / 2;
+            var centerY = (chartArea.top + chartArea.bottom) / 2;
+
+            ctx.save();
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = center.color;
+            ctx.font = "700 " + center.mainSize + "px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+            ctx.fillText(center.mainText, centerX, centerY - 8);
+            ctx.fillStyle = center.subColor;
+            ctx.font = "600 " + center.subSize + "px -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+            ctx.fillText(center.subText, centerX, centerY + 18);
+            ctx.restore();
         }
+    };
 
-        .chart-fallback {
-            display: none;
-            color: var(--muted);
-            font-size: 14px;
-            line-height: 1.7;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-        }
-
-        .data-table th {
-            background: #fff0f4;
-            color: #b64c67;
-            padding: 13px 10px;
-            text-align: left;
-        }
-
-        .data-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid var(--line);
-            vertical-align: top;
-            line-height: 1.55;
-        }
-
-        .data-table tr.today-row {
-            background: #f4f1ff;
-            font-weight: 550;
-        }
-
-        .data-table tr.low-row {
-            background: #fff7d8;
-        }
-
-        .data-table tr.over-row {
-            background: #fff0ec;
-        }
-
-        .risk-note {
-            display: inline-block;
-            margin-top: 4px;
-            color: #b46b2d;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .ok-note {
-            display: inline-block;
-            margin-top: 4px;
-            color: #4f9b7f;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .progress-box {
-            margin: 14px 0;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            font-size: 14px;
-            color: var(--muted);
-            margin-bottom: 6px;
-        }
-
-        .progress-bar {
-            height: 12px;
-            background: #f6e8ee;
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .progress-inner {
-            height: 100%;
-            width: 71.5%;
-            background: linear-gradient(90deg, #ffb3c1, #ff8fab);
-            border-radius: 6px;
-        }
-
-        .progress-inner.weight {
-            width: 70%;
-            background: linear-gradient(90deg, #b5ead7, #7fd5be);
-        }
-
-        .progress-inner.time {
-            width: 42.5%;
-            background: linear-gradient(90deg, #fff4c7, #ffdac1);
-        }
-
-        .health-note {
-            border-left: 4px solid var(--peach);
-            background: #fff8ed;
-            color: #6c4b3e;
-            line-height: 1.75;
-        }
-
-        .data-note {
-            border-left: 4px solid var(--sky);
-            background: #f6f7ff;
-            color: #4e5470;
-            line-height: 1.75;
-        }
-
-        .movement-note {
-            border-left: 4px solid var(--mint);
-            background: #f4fff9;
-            color: #3f6658
+    new Chart(document.getElementById("goalChart").getContext("2d"), {
+        type: "doughnut",
+        data: {
+            labels: [
+                "Fatloss已达成 " + completedWeight + "kg / " + fatLossPercent + "%",
+                "参考余量 " + remainingReference + "kg / " + (100 - fatLossPercent) + "%"
+            ],
+            datasets: [{ data: [completedWeight, remainingReference], backgroundColor: ["#b5ead7", "#f3dfe5"] }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutoutPercentage: 70,
+            legend: { position: "bottom", labels: { boxWidth: 14, fontColor: "#7b6f73" } },
+            elements: {
+                center: {
+                    mainText: fatLossPercent + "%",
+                    subText: "Fatloss",
+                    mainSize: 28,
+                    subSize: 13,
+                    color: "#e56f86",
+                    subColor: "#7b6f73"
+                }
+            }
+        },
+        plugins: [doughnutCenterText]
+    });
+});
+</script>
+</body>
+</html>
+```
