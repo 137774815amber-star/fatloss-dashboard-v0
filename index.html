@@ -3,10 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>40天减脂打卡计划 · 精致仪表盘</title>
+    <title>40天健康体态管理 · 数据仪表盘</title>
     <script src="https://cdn.bootcdn.net/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --ink: #3f3438;
+            --muted: #7b6f73;
+            --rose: #ff9aa2;
+            --rose-deep: #e56f86;
+            --peach: #ffdac1;
+            --cream: #fff4c7;
+            --mint: #b5ead7;
+            --sky: #c7ceea;
+            --lavender: #d7c0e8;
+            --card: rgba(255, 255, 255, 0.94);
+            --line: #f3dfe5;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,104 +29,106 @@
         }
 
         body {
-            background-image: url('https://img.freepik.com/free-vector/hand-drawn-healthy-food-background_23-2148169733.jpg');
+            background-image: url("https://img.freepik.com/free-vector/hand-drawn-healthy-food-background_23-2148169733.jpg");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            background-color: #f8f5f2;
-            color: #2d3436;
+            background-color: #fff8f4;
+            color: var(--ink);
             padding: 24px 16px;
-            max-width: 1100px;
+            max-width: 1180px;
             margin: 0 auto;
             position: relative;
         }
 
         body::before {
-            content: '';
+            content: "";
             position: fixed;
             inset: 0;
-            background: rgba(255, 255, 255, 0.82);
+            background:
+                linear-gradient(135deg, rgba(255, 244, 247, 0.91), rgba(245, 255, 250, 0.88)),
+                rgba(255, 255, 255, 0.86);
             z-index: -1;
         }
 
         .page-header {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
-            border-radius: 24px;
-            padding: 32px 20px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(255, 154, 158, 0.25);
-            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ff9aa2 0%, #ffdac1 48%, #d7c0e8 100%);
+            border-radius: 12px;
+            padding: 30px 22px;
+            box-shadow: 0 10px 28px rgba(229, 111, 134, 0.22);
+            margin-bottom: 20px;
             color: #fff;
         }
 
         .page-header h1 {
             font-size: 32px;
             margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.25;
         }
 
         .page-header p {
-            font-size: 16px;
-            opacity: 0.95;
-            letter-spacing: 1px;
+            font-size: 15px;
+            opacity: 0.96;
+            line-height: 1.7;
         }
 
         .overview-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 14px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card,
+        .content-card {
+            background: var(--card);
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(216, 163, 177, 0.13);
+            border: 1px solid rgba(255, 218, 225, 0.82);
         }
 
         .stat-card {
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 20px 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            padding: 18px 14px;
+            min-height: 132px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .stat-card i {
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: #ff7979;
+            font-size: 24px;
+            margin-bottom: 9px;
+            color: var(--rose-deep);
         }
 
         .stat-card .num {
-            font-size: 24px;
-            font-weight: 700;
-            color: #2d3436;
+            font-size: 23px;
+            font-weight: 750;
+            color: var(--ink);
             margin-bottom: 4px;
         }
 
         .stat-card .text {
-            font-size: 14px;
-            color: #636e72;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .stat-card.warning i,
+        .stat-card.warning .num {
+            color: #c46a4a;
         }
 
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 18px;
+            margin-bottom: 18px;
         }
 
         .content-card {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .content-card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            padding: 22px;
         }
 
         .card-full {
@@ -120,23 +136,36 @@
         }
 
         .card-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #2d3436;
-            margin-bottom: 18px;
+            font-size: 19px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 8px;
+            line-height: 1.35;
         }
 
         .card-title i {
-            color: #ff7979;
+            color: var(--rose-deep);
             font-size: 18px;
         }
 
         .chart-wrap {
             width: 100%;
-            height: 280px;
+            height: 288px;
+            position: relative;
+        }
+
+        .chart-wrap.tall {
+            height: 330px;
+        }
+
+        .chart-fallback {
+            display: none;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
         }
 
         .data-table {
@@ -146,462 +175,100 @@
         }
 
         .data-table th {
-            background: #fef3f4;
-            color: #d65c5c;
-            padding: 14px 10px;
+            background: #fff0f4;
+            color: #b64c67;
+            padding: 13px 10px;
             text-align: left;
-            border-radius: 8px 8px 0 0;
         }
 
         .data-table td {
             padding: 12px 10px;
-            border-bottom: 1px solid #f1f1f1;
-            word-break: break-all;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top;
+            line-height: 1.55;
         }
 
         .data-table tr.today-row {
-            background: #fff0f2;
-            font-weight: 500;
+            background: #f4f1ff;
+            font-weight: 550;
+        }
+
+        .data-table tr.low-row {
+            background: #fff7d8;
+        }
+
+        .data-table tr.over-row {
+            background: #fff0ec;
+        }
+
+        .risk-note {
+            display: inline-block;
+            margin-top: 4px;
+            color: #b46b2d;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .ok-note {
+            display: inline-block;
+            margin-top: 4px;
+            color: #4f9b7f;
+            font-size: 12px;
+            font-weight: 700;
         }
 
         .progress-box {
-            margin: 12px 0;
+            margin: 14px 0;
         }
 
         .progress-label {
             display: flex;
             justify-content: space-between;
+            gap: 12px;
             font-size: 14px;
-            color: #636e72;
+            color: var(--muted);
             margin-bottom: 6px;
         }
 
         .progress-bar {
             height: 12px;
-            background: #f1f1f1;
+            background: #f6e8ee;
             border-radius: 6px;
             overflow: hidden;
         }
 
         .progress-inner {
             height: 100%;
-            width: 71%;
-            background: linear-gradient(90deg, #74b9ff, #0984e3);
+            width: 71.5%;
+            background: linear-gradient(90deg, #ffb3c1, #ff8fab);
             border-radius: 6px;
         }
 
-        .food-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 12px;
+        .progress-inner.weight {
+            width: 70%;
+            background: linear-gradient(90deg, #b5ead7, #7fd5be);
         }
 
-        .food-tag {
-            background: #f0f8ff;
-            color: #0984e3;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
+        .progress-inner.time {
+            width: 42.5%;
+            background: linear-gradient(90deg, #fff4c7, #ffdac1);
         }
 
-        .tag-done {
-            color: #00b894;
-            font-weight: 600;
+        .health-note {
+            border-left: 4px solid var(--peach);
+            background: #fff8ed;
+            color: #6c4b3e;
+            line-height: 1.75;
         }
 
-        .tag-doing {
-            color: #ff7979;
-            font-weight: 600;
+        .data-note {
+            border-left: 4px solid var(--sky);
+            background: #f6f7ff;
+            color: #4e5470;
+            line-height: 1.75;
         }
 
-        .page-footer {
-            text-align: center;
-            padding: 24px 0;
-            color: #95a5a6;
-            font-size: 14px;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .overview-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-            .page-header h1 {
-                font-size: 24px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<header class="page-header">
-    <h1><i class="fa-solid fa-fire-flame-curved"></i> 40天减脂打卡计划</h1>
-    <p>初始体重：52.0kg | 目标体重：50.0kg | 每日热量预算：1500kcal</p>
-</header>
-
-<div class="overview-grid">
-    <div class="stat-card">
-        <i class="fa-solid fa-scale-balanced"></i>
-        <div class="num">50.6kg</div>
-        <div class="text">今日晨起体重（无排便）</div>
-    </div>
-    <div class="stat-card">
-        <i class="fa-solid fa-arrow-down-long"></i>
-        <div class="num">1.4kg</div>
-        <div class="text">累计减重</div>
-    </div>
-    <div class="stat-card">
-        <i class="fa-solid fa-percent"></i>
-        <div class="num">70%</div>
-        <div class="text">计划完成度</div>
-    </div>
-    <div class="stat-card">
-        <i class="fa-solid fa-calendar-check"></i>
-        <div class="num">Day 17</div>
-        <div class="text">已打卡天数</div>
-    </div>
-</div>
-
-<div class="main-grid">
-    <div class="content-card card-full">
-        <h2 class="card-title"><i class="fa-solid fa-fire"></i> 每日热量摄入 & 缺口对比</h2>
-        <div class="chart-wrap" style="height:320px;">
-            <canvas id="calorieGapChart"></canvas>
-        </div>
-    </div>
-</div>
-
-<div class="main-grid">
-    <div class="content-card card-full">
-        <h2 class="card-title"><i class="fa-solid fa-utensils"></i> 每日饮食明细（餐食+单品热量）</h2>
-        <table class="data-table">
-            <tr>
-                <th>天数</th>
-                <th>日期</th>
-                <th>体重</th>
-                <th>饮食明细</th>
-                <th>总摄入</th>
-                <th>热量缺口</th>
-            </tr>
-            <tr>
-                <td>Day1</td>
-                <td>05-13</td>
-                <td>52.0kg</td>
-                <td>早餐：蛋炒饭+肉+青菜｜午餐：烤鸡腿肉Taco｜晚餐：饺子馅5个</td>
-                <td>695 kcal</td>
-                <td>805 kcal</td>
-            </tr>
-            <tr>
-                <td>Day2</td>
-                <td>05-14</td>
-                <td>51.5kg</td>
-                <td>早餐：肉包+小米粥+鸡块+黑巧派｜午餐：银鲷鱼轻食｜饮品：橙C美式｜下午茶：水果+甜品</td>
-                <td>1138 kcal</td>
-                <td>362 kcal</td>
-            </tr>
-            <tr>
-                <td>Day3</td>
-                <td>05-15</td>
-                <td>51.4kg</td>
-                <td>早餐：手工粉+煎蛋｜加餐：果干糕｜饮品：豆奶+苹果C美式｜午餐：烤鸡牛轻食｜晚餐：水牛乳蛋糕</td>
-                <td>1073 kcal</td>
-                <td>427 kcal</td>
-            </tr>
-            <tr>
-                <td>Day12</td>
-                <td>05-24</td>
-                <td>51.4kg</td>
-                <td>重启打卡，无饮食记录</td>
-                <td>—</td>
-                <td>—</td>
-            </tr>
-            <tr>
-                <td>Day13</td>
-                <td>05-25</td>
-                <td>51.5kg</td>
-                <td>早餐：牛油果+面包丁｜午餐：赛百味牛肉三明治｜加餐：曲奇+薯条+橘子｜饮品：泡腾片｜晚餐：香蕉+荔枝</td>
-                <td>1124 kcal</td>
-                <td>376 kcal</td>
-            </tr>
-            <tr>
-                <td>Day14</td>
-                <td>05-26</td>
-                <td>51.1kg</td>
-                <td>早餐：Tim’s可颂｜加餐：茯苓夹饼｜午餐：烤大青虾轻食｜饮品：橙C美式｜晚餐：芭乐果 + 6个小番茄</td>
-                <td>750 kcal</td>
-                <td>750 kcal</td>
-            </tr>
-            <tr>
-                <td>Day15</td>
-                <td>05-27</td>
-                <td>50.6kg（未排便）</td>
-                <td>早餐：红豆包1个｜午餐：鲁菜四人餐平分｜晚餐：脆肉鲩火锅套餐1/4 + 烤乳鸽1/8</td>
-                <td>1558 kcal</td>
-                <td>-58 kcal</td>
-            </tr>
-            <tr>
-                <td>Day16</td>
-                <td>05-28</td>
-                <td>晨起51.0kg（午饭后排便）；晚间空腹51.0kg</td>
-                <td>早餐：百香果碱水面包+苹果汁｜午餐：虾仁轻食+无糖美式｜晚餐：未进食</td>
-                <td>569 kcal</td>
-                <td>931 kcal</td>
-            </tr>
-            <tr class="today-row">
-                <td>Day17</td>
-                <td>05-29</td>
-                <td>50.6kg（晨起空腹，无排便）</td>
-                <td>早餐：鳗鱼寿司便当（仅吃topping，一口米饭）｜午餐：贵州豆米双人火锅均分｜晚餐：7颗小番茄；饮品：400mL轻上苹果黄芪水</td>
-                <td>1072 kcal</td>
-                <td>428 kcal</td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-<div class="main-grid">
-    <div class="content-card">
-        <h2 class="card-title"><i class="fa-solid fa-chart-line"></i> 体重趋势 & 周度预测</h2>
-        <div class="chart-wrap">
-            <canvas id="weightChart"></canvas>
-        </div>
-    </div>
-
-    <div class="content-card">
-        <h2 class="card-title"><i class="fa-solid fa-chart-bar"></i> 热量摄入 & 计划参考</h2>
-        <div class="chart-wrap">
-            <canvas id="kcalChart"></canvas>
-        </div>
-    </div>
-
-    <div class="content-card">
-        <h2 class="card-title"><i class="fa-solid fa-circle-dot"></i> 减重目标完成度</h2>
-        <div class="chart-wrap">
-            <canvas id="goalChart"></canvas>
-        </div>
-    </div>
-
-    <div class="content-card">
-        <h2 class="card-title"><i class="fa-solid fa-book"></i> 每日打卡台账</h2>
-        <table class="data-table">
-            <tr>
-                <th>日期</th>
-                <th>打卡天数</th>
-                <th>体重</th>
-                <th>当日热量</th>
-            </tr>
-            <tr>
-                <td>05-13</td>
-                <td>Day1</td>
-                <td>52.0kg</td>
-                <td>695 kcal</td>
-            </tr>
-            <tr>
-                <td>05-14</td>
-                <td>Day2</td>
-                <td>51.5kg</td>
-                <td>1138 kcal</td>
-            </tr>
-            <tr>
-                <td>05-15</td>
-                <td>Day3</td>
-                <td>51.4kg</td>
-                <td>1073 kcal</td>
-            </tr>
-            <tr>
-                <td>05-24</td>
-                <td>Day12</td>
-                <td>51.4kg</td>
-                <td>—</td>
-            </tr>
-            <tr>
-                <td>05-25</td>
-                <td>Day13</td>
-                <td>51.5kg</td>
-                <td>1124 kcal</td>
-            </tr>
-            <tr>
-                <td>05-26</td>
-                <td>Day14</td>
-                <td>51.1kg</td>
-                <td>750 kcal</td>
-            </tr>
-            <tr>
-                <td>05-27</td>
-                <td>Day15</td>
-                <td>50.6kg（未排便）</td>
-                <td>1558 kcal</td>
-            </tr>
-            <tr>
-                <td>05-28</td>
-                <td>Day16</td>
-                <td>51.0kg</td>
-                <td>569 kcal</td>
-            </tr>
-            <tr class="today-row">
-                <td>05-29</td>
-                <td>Day17</td>
-                <td>50.6kg</td>
-                <td>1072 kcal</td>
-            </tr>
-        </table>
-    </div>
-</div>
-
-<div class="main-grid">
-    <div class="content-card card-full">
-        <h2 class="card-title"><i class="fa-solid fa-list-check"></i> 周目标进度 & 生活指南</h2>
-        <table class="data-table" style="margin-bottom: 20px;">
-            <tr>
-                <th>周次</th>
-                <th>目标体重区间</th>
-                <th>计划减重</th>
-                <th>当前状态</th>
-            </tr>
-            <tr>
-                <td>第1周</td>
-                <td>52.0kg → 51.4kg</td>
-                <td>0.6kg</td>
-                <td class="tag-done">✅ 已完成</td>
-            </tr>
-            <tr>
-                <td>第2周</td>
-                <td>51.4kg → 51.0kg</td>
-                <td>0.4kg</td>
-                <td class="tag-done">✅ 已完成</td>
-            </tr>
-            <tr>
-                <td>第3周</td>
-                <td>51.0kg → 50.6kg</td>
-                <td>0.4kg</td>
-                <td class="tag-done">✅ 已完成！今日完美控卡收官</td>
-            </tr>
-            <tr>
-                <td>第4周</td>
-                <td>50.6kg → 50.25kg</td>
-                <td>0.35kg</td>
-                <td>⏳ 明日开始</td>
-            </tr>
-            <tr>
-                <td>第5周</td>
-                <td>50.25kg → 49.9kg</td>
-                <td>0.35kg</td>
-                <td>⏳ 待开始</td>
-            </tr>
-        </table>
-
-        <div class="progress-box">
-            <div class="progress-label">
-                <span><i class="fa-solid fa-glass-water"></i> 今日热量进度</span>
-                <span>1072kcal / 1500kcal</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-inner"></div>
-            </div>
-        </div>
-
-        <p style="margin-top: 14px; color: #636e72; font-size: 14px; line-height: 1.6;">
-            💡 今日表现复盘：早餐精准只吃馅料、午餐火锅合理分餐、晚餐仅7颗小番茄，搭配低卡苹果黄芪水温和消水肿，全天整体控卡平稳，无超标风险；黄芪饮品可缓解火锅高盐带来的身体储水问题。
-        </p>
-    </div>
-</div>
-
-<footer class="page-footer">
-    <i class="fa-solid fa-star"></i> 自律打卡 · 遇见更好的自己 | 持续更新中
-</footer>
-
-<script>
-window.addEventListener('load', function(){
-
-// 热量摄入 + 缺口 图表
-new Chart(document.getElementById('calorieGapChart').getContext('2d'), {
-    type: 'bar',
-    data: {
-        labels: ['Day1','Day2','Day3','Day12','Day13','Day14','Day15','Day16','Day17'],
-        datasets: [
-            {
-                label: '实际摄入(kcal)',
-                data: [695,1138,1073,0,1124,750,1558,569,1072],
-                backgroundColor: '#74b9ff',
-                borderRadius: 6
-            },
-            {
-                label: '热量缺口(kcal)',
-                data: [805,362,427,0,376,750,-58,931,428],
-                borderColor: '#ff7979',
-                borderDash: [5,5],
-                borderWidth: 2,
-                pointRadius: 4,
-                type: 'line',
-                fill: false
-            },
-            {
-                label: '预算1500kcal',
-                data: [1500,1500,1500,1500,1500,1500,1500,1500,1500],
-                borderColor: '#999',
-                borderDash: [2,2],
-                type: 'line',
-                pointRadius: 0,
-                fill: false
-            }
-        ]
-    },
-    options: { responsive: true, maintainAspectRatio: false }
-});
-
-// 体重趋势图表
-new Chart(document.getElementById('weightChart').getContext('2d'), {
-    type: 'line',
-    data: {
-        labels: ['Day1','Day2','Day3','Day12','Day13','Day14','Day15','Day16','Day17'],
-        datasets: [
-            {
-                label: '体重(kg)',
-                data: [52.0,51.5,51.4,51.4,51.5,51.1,50.6,51.0,50.6],
-                borderColor: '#ff7979',
-                tension: 0.4,
-                fill: true
-            }
-        ]
-    },
-    options: { responsive: true, maintainAspectRatio: false }
-});
-
-// 单项热量柱状图
-new Chart(document.getElementById('kcalChart').getContext('2d'), {
-    type: 'bar',
-    data: {
-        labels: ['Day1','Day2','Day3','Day13','Day14','Day15','Day16','Day17'],
-        datasets: [
-            {
-                label: '摄入(kcal)',
-                data: [695,1138,1073,1124,750,1558,569,1072],
-                backgroundColor: '#74b9ff'
-            }
-        ]
-    },
-    options: { responsive: true, maintainAspectRatio: false }
-});
-
-// 目标完成度环形图
-new Chart(document.getElementById('goalChart').getContext('2d'), {
-    type: 'doughnut',
-    data: {
-        labels: ['已减重1.4kg','待减重0.6kg'],
-        datasets: [{
-            data: [1.4, 0.6],
-            backgroundColor: ['#00b894','#e9ecef']
-        }]
-    },
-    options: { responsive: true, maintainAspectRatio: false, cutoutPercentage:70 }
-});
-
-});
-</script>
-</body>
-</html>
+        .movement-note {
+            border-left: 4px solid var(--mint);
+            background: #f4fff9;
+            color: #3f6658
